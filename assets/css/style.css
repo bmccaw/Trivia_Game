@@ -1,10 +1,16 @@
 h1 {
     font-family: 'Averia Serif Libre', cursive;
 }
+body {
+    background: black;
+}
 .background {
     background: black;
 }
-#pageLoad {
+/* #pageLoad {
     position: absolute;
     top: 150px;
-}
+} */
+/* #start {
+    display: inline-block;
+} */

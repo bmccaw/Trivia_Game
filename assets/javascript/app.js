@@ -1,7 +1,7 @@
 //Pop-up on load to begin the game. May change to a button. 
-$(window).ready (function () {
-    $('#pageLoad').modal ('show')
-});
+// $(window).ready (function () {
+//     $('#pageLoad').modal ('show')
+// });
 //Currently not working - may scrap video background
 // $('#start').click(function() {
 //     $('#video').get(0).play();
@@ -41,26 +41,40 @@ $(document).ready(function () {
         let unanswered = 0;
     }
     //Display question and answer choices -- currently displays last question in array and no answer buttons
-    for (var i = 0; i < questions.length; i++) {
-        let question = questions[i].question;
-        $('#question').html(question);
-        let options = questions[i].choices;
-        document.body.appendChild(document.createElement('br'));
-        let ansButton = $('<button>');
-        ansButton.addClass('btn btn-dark selector');
-        ansButton.attr('data-ans', options[i]);
-        ansButton.text(options[i]);
-        $('#answerchoices').append(ansButton);
+    // for (var i = 0; i < questions.length; i++) {
+    //     let question = questions[i].question;
+    //     $('#question').html(question);
+    //     let options = questions[i].choices;
+    //     document.body.appendChild(document.createElement('br'));
+    //     let ansButton = $('<button>');
+    //     ansButton.addClass('btn btn-dark selector');
+    //     ansButton.attr('data-ans', options[i]);
+    //     ansButton.text(options[i]);
+    //     $('#answerchoices').append(ansButton);
 
-        console.log(question);
-        console.log(options);
-        console.log(ansButton);
-    }
-    //Timer 
-    $('#start').click(function(){ // If changing to a start button, need to make sure to update this. Attach to the reset function.
+    //     console.log(question);
+    //     console.log(options);
+    //     console.log(ansButton);
+    // }
+
+    $('#start').click(function () { // If changing to a start button, need to make sure to update this. Attach to the reset function.
+        $('#start').hide();
         timer();
-    });
 
+        //Display question and answer choices -- currently displays last question in array and no answer buttons
+        for (var i = 0; i < questions.length; i++) {
+            let question = questions[i].question;
+            $('#question').html(question);
+            let options = questions[i].choices;
+            document.body.appendChild(document.createElement('br'));
+            $('#answerchoices').html(options);
+            
+            console.log(question);
+            console.log(options);
+        }
+
+    });
+    //Timer 
     function timer() {
         clearInterval(triviaTime)
         triviaTime = setInterval(decrement, 1000);
@@ -73,7 +87,7 @@ $(document).ready(function () {
         if (timeRemaining === 0) {
             unanswered++;
             clearInterval(triviaTime)
-            $('#timer').append('<br>','Out of Time!');
+            $('#timer').append('<br>', 'Out of Time!');
             //Display correct answer. SetTimeout for 5 seconds. Move to next question. Reset timer. 
         }
     }
@@ -81,11 +95,11 @@ $(document).ready(function () {
 
     //Give button an On click event that will pull the next question from the array. Also set this to happen onTimeout so the correct answer can be displayed.
     //If statement to go to next item after each button press until at the end of the array, where the results screen will display with button to reset.
-    
 
 
 
-    
+
+
 
 
 
