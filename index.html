@@ -9,27 +9,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre" rel="stylesheet">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="assets/javascript/app.js"></script>
 </head>
 
 <body>
         <div class="background" style= "position: fixed; z-index: -99; width: 100%; height: 100%">
-                <iframe frameborder="0" height="100%" width="100%" 
-                      src="https://youtube.com/embed/CvAXidAPTRM?autoplay=1&loop=1&controls=0&showinfo=0&autohide=1&iv_load_policy=3&disablekb=1&modestbranding=1&rel=0&mute=1&playlist=CvAXidAPTRM">
-                </iframe>
-            </div>
+               <!--  <iframe id="video" frameborder="0" height="100%" width="100%" 
+                      src="https://youtube.com/embed/CvAXidAPTRM?autoplay=0&loop=1&controls=0&showinfo=0&autohide=1&iv_load_policy=3&disablekb=1&modestbranding=1&rel=0&mute=0&playlist=CvAXidAPTRM">
+                </iframe>-->
+            </div> 
             <div class="modal fade" id="pageLoad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                      <div class="modal-content text-light">
+                      <div class="modal-content text-light bg-dark">
                         <div class="modal-header">
-                          <h2 class="modal-title text-center" id="exampleModalLabel">The Sacred Grove</h2>
+                          <h2 class="modal-title text-center" id="exampleModalLabel">The Lord of the Rings Trivia</h2>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                         <div class="modal-body">
+                            <p>
+                                Welcome to the Lord of the Rings Trivia game!
+                            </p>
+                            <p>
+                                Press 'Start' to begin.
+                            </p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-dark mr-auto ml-auto" data-dismiss="modal" id="start">Start</button>
@@ -37,25 +43,26 @@
                       </div>
                     </div>
                   </div>
-    <div class="container border border-dark rounded p-4 m-auto">
+    <div class="container border border-dark rounded p-4 m-auto text-light">
         <div class="row">
             <div class="col-sm-12 text-center text-light">
                 <h1>Lord of the Rings Trivia</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 text-center">
                 <div id="timer"></div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 text-center">
                 <div id="question"></div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <div id="answers"></div>
+            <div class="col-sm-12 text-center">
+                <div id="answerschoices">
+                </div>
             </div>
         </div>
     </div>
