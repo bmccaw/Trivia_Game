@@ -1,4 +1,4 @@
-h1 {
+h1, h2, h3{
     font-family: 'Averia Serif Libre', cursive;
 }
 body {
@@ -6,6 +6,13 @@ body {
 }
 .background {
     background: black;
+}
+.ring {
+    content: url(../images/one_ring_small.gif);
+    display:none;
+}
+.answerchoice:hover + .ring {
+    display:block;
 }
 /* #pageLoad {
     position: absolute;
