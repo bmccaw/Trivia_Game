@@ -13,14 +13,14 @@ $(document).ready(function () {
     let questions = [
 
         {
-            question: 'Fly you fools!',
-            choices: ['Gandalf', 'Frodo', 'Aragorn', 'Sauron'],
+            question: 'Which of these dwarves is the father of Gimli?',
+            choices: ['Gloin', 'Oin', 'Dwalin', 'Balin'],
             answer: 0
         },
 
         {
-            question: 'I love you, Mr. Frodo!',
-            choices: ['Gandalf', 'Legolas', 'Sam', 'Orc 25'],
+            question: 'What is the name of the massive statues the fellowship encountered as they traveled down the river Anduin?',
+            choices: ['Amon Hen', 'Amon Sul', 'Argonath', 'Dol Amroth'],
             answer: 2
         },
     ];
@@ -39,6 +39,8 @@ $(document).ready(function () {
         let correct = 0;
         let incorrect = 0;
         let unanswered = 0;
+
+
     }
     //Display question and answer choices -- currently displays last question in array and no answer buttons
     // for (var i = 0; i < questions.length; i++) {
@@ -60,18 +62,8 @@ $(document).ready(function () {
     $('#start').click(function () { // If changing to a start button, need to make sure to update this. Attach to the reset function.
         $('#start').hide();
         timer();
-
-        //Display question and answer choices -- currently displays last question in array and no answer buttons
-        for (var i = 0; i < questions.length; i++) {
-            let question = questions[i].question;
-            $('#question').html(question);
-            let options = questions[i].choices;
-            document.body.appendChild(document.createElement('br'));
-            $('#answerchoices').html(options);
-            
-            console.log(question);
-            console.log(options);
-        }
+        nextQuestion();
+        
 
     });
     //Timer 
@@ -91,7 +83,23 @@ $(document).ready(function () {
             //Display correct answer. SetTimeout for 5 seconds. Move to next question. Reset timer. 
         }
     }
+    //Display question and answer choices -- currently displays last question in array and no answer buttons
+    function nextQuestion () {
+    for (let i = 0; i < questions.length; i++) {
+        let question = questions[i].question;
+        $('#question').html(question);
+        document.body.appendChild(document.createElement('br'));
+        for (let j = 0; j < questions.length; j++) {
+            let option = questions[j].choices;
+            $('#answerchoices').html(option);
 
+        console.log(question);
+        console.log(option);
+        }
+        
+        
+    }
+    }
 
     //Give button an On click event that will pull the next question from the array. Also set this to happen onTimeout so the correct answer can be displayed.
     //If statement to go to next item after each button press until at the end of the array, where the results screen will display with button to reset.
