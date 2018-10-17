@@ -16,44 +16,55 @@ $(document).ready(function () {
             question: 'Which of these dwarves is the father of Gimli?',
             choices: ['Gloin', 'Oin', 'Dwalin', 'Balin'],
             answer: [true,false,false,false],
+            correctAnswer: 'Gloin'
         },
         {
             question: 'What is the name of the massive statues the fellowship encountered as they traveled down the river Anduin?',
             choices: ['Amon Hen', 'Amon Sul', 'Argonath', 'Dol Amroth'],
             answer: [false,false,true,false],
+            correctAnswer: 'Argonath'
         },
         {
             question: 'This area of the Kingdom of Gondor is where Frodo met the ranger Faramir.',
             choices: ['Lothlorien', 'Cair Andros', 'Arnor', 'Ithilien'],
             answer: [false,false,false,true],
+            correctAnswer: 'Ithilien'
         },
         {
             question: 'Which of these names does NOT refer to Aragorn?',
             choices: ['Strider', 'Elessar', 'Anarion', 'Thorongil'],
             answer: [false,false,true,false],
+            correctAnswer: 'Anarion'
         },
         {
             question: 'Which of these is NOT one of the five wizards?',
             choices: ['Gandalf', 'Celebrimbor', 'Radagast', 'Saruman'],
             answer: [false,true,false,false],
+            correctAnswer: 'Celebrimbor'
         },
         {
             question: 'Who is "The Necromancer" that occupies Dol Guldur?',
             choices: ['Sauron', 'Melkor', 'Saruman', 'Khamul'],
             answer: [true,false,false,false],
+            correctAnswer: 'Sauron'
         },
         {
             question: 'This creature of fire and shadow was known to the dwarves as "Durin\'s Bane."',
             choices: ['Shelob', 'Uruk-hai', 'Nazgul', 'Balrog'],
             answer: [false,false,false,true],
+            correctAnswer: 'Balrog'
         },
         {
-            question: 'Which of these characters did not possess a ring of power?',
+            question: 'Which of these characters did NOT possess a ring of power?',
             choices: ['Galadriel', 'Aragorn', 'Elrond', 'Gandalf'],
             answer: [false,true,false,false],
+            correctAnswer: 'Aragorn'
         },
     ];
-    let userGuess;
+    let userGuess = '';
+    var index;
+    var pick;
+    var holder = [];
     //Counters
     let correct = 0;
     let incorrect = 0;
@@ -65,6 +76,7 @@ $(document).ready(function () {
     //RESET function once game is complete
     function reset() {
 
+        index = 0;
         let correct = 0;
         let incorrect = 0;
         let unanswered = 0;
@@ -75,7 +87,21 @@ $(document).ready(function () {
         reset();
         timer();
         getQuestion();
-        
+        //This should check if the button name matches the correct answer in the object.
+        $('.answerchoice').click(function() {
+            if ($(this).attr('value') == questions.correctAnswer) {
+                correct++;
+            }
+            else {
+                incorrect++;
+            }
+            console.log('Working!');
+            console.log(this);
+            console.log($(this).attr('value'));
+            console.log(questions.correctAnswer);
+            console.log(correct);
+            console.log(incorrect);
+        });
 
     });
     //Timer 
@@ -85,7 +111,7 @@ $(document).ready(function () {
     }
     function decrement() {
         timeRemaining--;
-
+        running = true;
         $('#timer').html('Time Remaining: ' + timeRemaining + ' seconds.');
 
         if (timeRemaining === 0) {
@@ -94,43 +120,43 @@ $(document).ready(function () {
             $('#timer').append('<br>', 'Out of Time!');
             //Display correct answer. SetTimeout for 5 seconds. Move to next question. Reset timer. 
             console.log(unanswered);
-        }
+        }   
+    }
+    function stop () {
+    running = false;
+    clearInterval(triviaTime);
     }
     //Display question and answer choices -- currently displays all questions and answer choices at once - need to figure out how to display one per page.
     function getQuestion () {
+
         //question
     for (let i = 0; i < questions.length; i++) {
         let question = questions[i].question;
         $('#question').append('<h3>' + question + '</h3>');
-        document.body.appendChild(document.createElement('br'));
         //answer choices
         for (let j = 0; j < questions[i].choices.length; j++) {
             let option = questions[i].choices[j];
-            $('#question').append('<span class="ring"></span><h3><button type="button" name="answer" class="answerchoice"' + i + '"value="' + option + '">' + option + '</button></h3>');
-            //assign true to correct guess and false to incorrect guesses
-            for (let k = 0; k < questions[i].answer.length; k++) {
-                let guess = questions[i].answer; //something definitely wrong here. Need to figure out. 
-                $('.answerchoice').attr('value', guess);
-
-        console.log(question);
-        console.log(option);
-        console.log(guess);
-            }
-        
+            $('#question').append('<span class="ring"></span><h3><button type="button" name="answer" class="answerchoice" value= ' + option + '>' + option + '</button></h3>');
+            if (i >= 8){break;}
+            console.log(question);
+            console.log(option);
+            console.log(questions[i].correctAnswer);
         }       
     }
-    }
-    function correctIncorrect() {
-        if (indexof('.answerchoice').click() === questions.answer) {
-            correct++;
-        }
-            else {
-                incorrect++;
-            }
-        //answer variable marks the position of the correct answer in the choices array. 
-        //need to figure out a way for this function to check that this button has been pressed and increment 
-        //the correct variable
-    }
+    } //This should check if the button name matches the correct answer in the object.
+    //Currently can't access loop variables while outside the loop. Also won't execute outside the loop.
+    // $('.answerchoice').click(function() {
+    //     if (this.value == questions[index].correctAnswer) {
+    //         correct++;
+    //     }
+    //     else {
+    //         incorrect++;
+    //     }
+    //     console.log('Working!');
+    //     console.log(correct);
+    //     console.log(incorrect);
+    // });
+
     //This function will hide all quiz content, display results and a win/lose message, and show the start button to start the game again.
     function displayResults() {
         $('#timer').empty();
