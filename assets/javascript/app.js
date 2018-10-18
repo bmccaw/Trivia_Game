@@ -15,50 +15,42 @@ $(document).ready(function () {
         {
             question: 'Which of these dwarves is the father of Gimli?',
             choices: ['Gloin', 'Oin', 'Dwalin', 'Balin'],
-            answer: [true,false,false,false],
-            correctAnswer: 'Gloin'
+            correctAnswer: 0,
         },
         {
             question: 'What is the name of the massive statues the fellowship encountered as they traveled down the river Anduin?',
             choices: ['Amon Hen', 'Amon Sul', 'Argonath', 'Dol Amroth'],
-            answer: [false,false,true,false],
-            correctAnswer: 'Argonath'
+            correctAnswer: 2,
         },
         {
             question: 'This area of the Kingdom of Gondor is where Frodo met the ranger Faramir.',
             choices: ['Lothlorien', 'Cair Andros', 'Arnor', 'Ithilien'],
-            answer: [false,false,false,true],
-            correctAnswer: 'Ithilien'
+            correctAnswer: 3,
         },
         {
             question: 'Which of these names does NOT refer to Aragorn?',
             choices: ['Strider', 'Elessar', 'Anarion', 'Thorongil'],
-            answer: [false,false,true,false],
-            correctAnswer: 'Anarion'
+            correctAnswer: 2,
         },
         {
             question: 'Which of these is NOT one of the five wizards?',
             choices: ['Gandalf', 'Celebrimbor', 'Radagast', 'Saruman'],
-            answer: [false,true,false,false],
-            correctAnswer: 'Celebrimbor'
+            correctAnswer: 1,
         },
         {
             question: 'Who is "The Necromancer" that occupies Dol Guldur?',
             choices: ['Sauron', 'Melkor', 'Saruman', 'Khamul'],
-            answer: [true,false,false,false],
-            correctAnswer: 'Sauron'
+            correctAnswer: 0,
         },
         {
             question: 'This creature of fire and shadow was known to the dwarves as "Durin\'s Bane."',
             choices: ['Shelob', 'Uruk-hai', 'Nazgul', 'Balrog'],
-            answer: [false,false,false,true],
-            correctAnswer: 'Balrog'
+            correctAnswer: 3,
         },
         {
             question: 'Which of these characters did NOT possess a ring of power?',
             choices: ['Galadriel', 'Aragorn', 'Elrond', 'Gandalf'],
-            answer: [false,true,false,false],
-            correctAnswer: 'Aragorn'
+            correctAnswer: 1,
         },
     ];
     let userGuess = '';
@@ -69,8 +61,10 @@ $(document).ready(function () {
     let correct = 0;
     let incorrect = 0;
     let unanswered = 0;
+    let questionCount = questions.length;
     //Timer variables
     let timeRemaining = 30;
+    var running = false;
     let triviaTime;
 
     //RESET function once game is complete
@@ -87,21 +81,34 @@ $(document).ready(function () {
         reset();
         timer();
         getQuestion();
-        //This should check if the button name matches the correct answer in the object.
-        $('.answerchoice').click(function() {
-            if ($(this).attr('value') == questions.correctAnswer) {
-                correct++;
-            }
-            else {
-                incorrect++;
-            }
-            console.log('Working!');
-            console.log(this);
-            console.log($(this).attr('value'));
-            console.log(questions.correctAnswer);
-            console.log(correct);
-            console.log(incorrect);
-        });
+        for(var i = 0; i < questions.length; i++) {
+            holder.push(questions[i]);
+            console.log(holder);
+        }
+        //This function should check if the button name matches the correct answer in the object.
+    $('.answerchoice').click(function() {
+        userGuess = parseInt($(this).attr('guess-value'));
+        if (userGuess === pick.correctAnswer) {
+            stop();
+            correct++;
+            userGuess ='';
+            $('#answerarea').html('<h3>Correct!</h3>')
+            displayResults();
+            
+        }
+        else {
+            stop();
+            incorrect++;
+            userGuess = '';
+            $('#answerarea').html('<h3>Wrong! The correct answer is ' + pick.choices[pick.correctAnswer] + '</h3>');
+            displayResults();
+        }
+        console.log('Working!');
+        console.log(this);
+        console.log('Correct answer is ' + pick.correctAnswer);
+        console.log('Correct answers: ' + correct);
+        console.log('Incorrect answers: ' + incorrect);
+    });
 
     });
     //Timer 
@@ -116,8 +123,10 @@ $(document).ready(function () {
 
         if (timeRemaining === 0) {
             unanswered++;
+            stop();
             clearInterval(triviaTime)
-            $('#timer').append('<br>', 'Out of Time!');
+            $('#answerarea').html('<h3>Out of Time! The correct answer is ' + pick.choices[pick.correctAnswer] + '</h3>');
+            displayResults();
             //Display correct answer. SetTimeout for 5 seconds. Move to next question. Reset timer. 
             console.log(unanswered);
         }   
@@ -128,50 +137,51 @@ $(document).ready(function () {
     }
     //Display question and answer choices -- currently displays all questions and answer choices at once - need to figure out how to display one per page.
     function getQuestion () {
-
+        index = Math.floor(Math.random() * questions.length);
+        pick = questions[index];
         //question
-    for (let i = 0; i < questions.length; i++) {
-        let question = questions[i].question;
-        $('#question').append('<h3>' + question + '</h3>');
-        //answer choices
-        for (let j = 0; j < questions[i].choices.length; j++) {
-            let option = questions[i].choices[j];
-            $('#question').append('<span class="ring"></span><h3><button type="button" name="answer" class="answerchoice" value= ' + option + '>' + option + '</button></h3>');
-            if (i >= 8){break;}
-            console.log(question);
-            console.log(option);
-            console.log(questions[i].correctAnswer);
-        }       
-    }
-    } //This should check if the button name matches the correct answer in the object.
-    //Currently can't access loop variables while outside the loop. Also won't execute outside the loop.
-    // $('.answerchoice').click(function() {
-    //     if (this.value == questions[index].correctAnswer) {
-    //         correct++;
-    //     }
-    //     else {
-    //         incorrect++;
-    //     }
-    //     console.log('Working!');
-    //     console.log(correct);
-    //     console.log(incorrect);
-    // });
+        $('#question').html('<h3>' + pick.question + '</h3>');
+        for (let i = 0; i < pick.choices.length; i++) {
+            let userChoice = $('<button>');
+            userChoice.addClass('btn btn-light answerchoice');
+            userChoice.html(pick.choices[i]);
+            userChoice.attr('guess-value', i);
+            $('#answerarea').append(userChoice);  
+            
+        }     
+        console.log(index);
+        console.log(pick);
+    }    
 
     //This function will hide all quiz content, display results and a win/lose message, and show the start button to start the game again.
     function displayResults() {
+
+        //show image or video
+        //setTimeout 5-7 seconds
+        //run check
+    
+        if ((correct + incorrect + unanswered) === questionCount) {
         $('#timer').empty();
         $('#question').empty();
-        $('#question').append('<h3>Correct: ' + correct + '</h3>');
-        $('#question').append('<h3>Incorrect: ' + incorrect + '</h3>');
-        $('#question').append('<h3>Unanswered: ' + unanswered + '</h3>');
+        $('#question').html('<h2>Results:</h2>');
+        $('#answerarea').append('<h3>Correct: ' + correct + '</h3>');
+        $('#answerarea').append('<h3>Incorrect: ' + incorrect + '</h3>');
+        $('#answerarea').append('<h3>Unanswered: ' + unanswered + '</h3>');
         $('#start').show();
-
         if (correct > incorrect) {
-            $('#question').prepend('<h4>Congratulations! You win!</h4>')
+            $('#answerarea').append('<h4>Congratulations! You win!</h4>')
         }
         else {
-            $('#question').prepend('<h4>All is lost!</h4>')
+            $('#answerarea').append('<h4>All is lost!</h4>')
         }
+        }
+        else {
+            timer();
+            getQuestion();
+        }
+
+        
+        console.log('Question count: ' + questionCount);
     }
     //Give button an On click event that will pull the next question from the array. Also set this to happen onTimeout so the correct answer can be displayed.
     //If statement to go to next item after each button press until at the end of the array, where the results screen will display with button to reset.
