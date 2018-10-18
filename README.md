@@ -12,6 +12,7 @@ Currently not working
 =======================
 - ~~questions currently displaying all at once~~ fixed!
 - ~~cannot figure out how to assign buttons their true/false value~~ fixed!
-- goes to next question but doesn't continue after that
-- certain instances where timer doesn't stop when it should
-- question area never gets emptied
+- goes to next question but doesn't continue after that as button click function doesn't trigger
+- ~~certain instances where timer doesn't stop when it should~~ fixed!
+- ~~question area never gets emptied~~ fixed!
+- questions currently displaying in random order, which is fine, except questions are displayed multiple times
