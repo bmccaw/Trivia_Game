@@ -90,7 +90,7 @@ $(document).ready(function () {
             console.log(holder);
         }
         //This function should check if the button name matches the correct answer in the object. Currently only works for the first question.
-    $('.answerchoice').on('click', function() {
+    $(document).on('click', '.answerchoice',function() {
         userGuess = parseInt($(this).attr('guess-value'));
         if (userGuess === pick.correctAnswer) {
             stop();
@@ -98,7 +98,7 @@ $(document).ready(function () {
             userGuess ='';
             $('#answerarea').html('<h3>Correct!</h3>')
             displayResults();
-            
+            toggleDone();
         }
         else {
             stop();
@@ -114,8 +114,9 @@ $(document).ready(function () {
         console.log('Correct answer is ' + pick.correctAnswer);
         console.log('Correct answers: ' + correct);
         console.log('Incorrect answers: ' + incorrect);
+    
     });
-
+    
     });
     //Timer 
     function timer() {
