@@ -52,11 +52,32 @@ $(document).ready(function () {
             choices: ['Galadriel', 'Aragorn', 'Elrond', 'Gandalf'],
             correctAnswer: 1,
         },
+        {
+            question: 'At the beginning of "The Fellowship of the Ring", what birthday is Bilbo celebrating"?',
+            choices: ['100', '111', '99', '101'],
+            correctAnswer: 1,
+        },
+        {
+            question: 'In the book, "The Fellowship of the Ring," what elf meets Aragorn and the hobbits on the way to Rivendell?',
+            choices: ['Arwen', 'Elrond', 'Haldir', 'Glorfindel'],
+            correctAnswer: 3,
+        },
+        {
+            question: 'This sword, also known as "Flame of the West," was reforged from the shards of Narsil',
+            choices: ['Anduril', 'Glamdring', 'Orcrist', 'Gurthang'],
+            correctAnswer: 0,
+        },
+        {
+            question: 'In "The Fellowship of the Ring," who is Sam in relation to Frodo?',
+            choices: ['Brother', 'Cousin', 'Gardener', 'Housekeeper'],
+            correctAnswer: 2,
+        },
     ];
     let userGuess = '';
     var index;
     var pick;
     var holder = [];
+    var newArray = [];
     //Counters
     let correct = 0;
     let incorrect = 0;
@@ -98,7 +119,6 @@ $(document).ready(function () {
             userGuess ='';
             $('#answerarea').html('<h3>Correct!</h3>')
             displayResults();
-            toggleDone();
         }
         else {
             stop();
@@ -163,6 +183,9 @@ $(document).ready(function () {
     //This function will hide all quiz content, display results and a win/lose message, and show the 'Play Again' to start the game again.
     function displayResults() {
 
+        newArray.push(pick);
+        questions.splice(index,1);
+        console.log('New Array = ' + newArray);
         //show image or video
         //setTimeout 5-7 seconds
         //run check

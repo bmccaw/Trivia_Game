@@ -16,4 +16,4 @@ Currently not working
 - ~~goes to next question but doesn't continue after that as button click function doesn't trigger~~ fixed!
 - ~~certain instances where timer doesn't stop when it should~~ fixed!
 - ~~question area never gets emptied~~ fixed!
-- questions currently displaying in random order, which is fine, except questions are displayed multiple times
+- ~~questions currently displaying in random order, which is fine, except questions are displayed multiple times~~ fixed!
