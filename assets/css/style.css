@@ -25,10 +25,9 @@ body {
     margin-left:auto;
     margin-right:auto;
 }
-/* .ring {
-    content: url(../images/one_ring_small.gif);
-    display:none;
-} */
+ /* #ring {
+    filter: drop-shadow(6px 4px 1px #1a1a1f);
+}  */
 .answerchoice:hover {
     background-image: url(../images/ring_text.gif);
     background-position: center;
@@ -52,7 +51,7 @@ body {
     font-family: 'Averia Serif Libre', cursive;
     display:block;
     margin:auto;
-    margin-top: 70px;
+    margin-top: 80px;
     padding:4px;
     font-size: 28px;
     border: solid 2px black;
@@ -67,10 +66,11 @@ body {
     font-family: 'Averia Serif Libre', cursive;
     display:block;
     margin:auto;
+    margin-top: -100px;
     padding:4px;
     font-size: 28px;
     border: solid 2px black;
-    width:8em;
+    width:10em;
 }
 #reset:hover {
     cursor: pointer;

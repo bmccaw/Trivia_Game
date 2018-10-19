@@ -46,7 +46,7 @@ $(document).ready(function () {
             question: 'Who is "The Necromancer" that occupies Dol Guldur?',
             choices: ['Sauron', 'Melkor', 'Saruman', 'Khamul'],
             correctAnswer: 0,
-            videoCode: '<iframe width="800" height="360" src="https://www.youtube.com/embed/1GJRrj3WVto?controls=0&amp;start=90&amp;modestbranding=1&autoplay=1&disablekb&rel=0&showinfo=0&iv_load_policy=3" </iframe>'
+            videoCode: '<iframe width="800" height="360" src="https://www.youtube.com/embed/PIrVmJeI1_8?controls=0&amp;start=110&amp;modestbranding=1&autoplay=1&disablekb&rel=0&showinfo=0&iv_load_policy=3" </iframe>'
         },
         {
             question: 'This creature of fire and shadow was known to the dwarves as "Durin\'s Bane."',
@@ -116,6 +116,7 @@ $(document).ready(function () {
 
     $('#start').click(function () { //calls the first question and resets score to 0 and timer to 30 sec
         $(this).hide();
+        $('#ring').hide();
         // reset();
         timer();
         getQuestion();
