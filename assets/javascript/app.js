@@ -1,11 +1,3 @@
-//Pop-up on load to begin the game. May change to a button. 
-// $(window).ready (function () {
-//     $('#pageLoad').modal ('show')
-// });
-//Currently not working - may scrap video background
-// $('#start').click(function() {
-//     $('#video').get(0).play();
-// });
 $(document).ready(function () {
     //Global Variables
     //=================
@@ -100,7 +92,8 @@ $(document).ready(function () {
     let timeRemaining = 30;
     var running = false;
     let triviaTime;
- 
+    
+    //Hide Play Again button at start and play bg music on click
     $('#reset').hide();    
     $('body').click(function() {
         $('audio').get(0).play();
@@ -116,7 +109,7 @@ $(document).ready(function () {
             holder.push(questions[i]);
             console.log(holder);
         }
-        //This function should check if the button name matches the correct answer in the object. Currently only works for the first question.
+        //This function checks if the button name matches the correct answer in the object.
     $(document).on('click', '.answerchoice',function() {
         userGuess = parseInt($(this).attr('guess-value'));
         if (userGuess === pick.correctAnswer) {
@@ -173,7 +166,7 @@ $(document).ready(function () {
     running = false;
     clearInterval(triviaTime);
     }
-    //Display question and answer choices 
+    //Display question and answer choices at random.
     function getQuestion () {
         index = Math.floor(Math.random() * questions.length); //pulls question at random 
         pick = questions[index];
@@ -198,9 +191,7 @@ $(document).ready(function () {
         newArray.push(pick);
         questions.splice(index,1);
         console.log('New Array = ' + newArray);
-        //show image or video
-        //setTimeout 5-7 seconds
-        //run check
+        //set timeout for 20 seconds to accommodate video
         setTimeout(function() {
             $('#answerarea').empty();
             timeRemaining = 30;
