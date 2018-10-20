@@ -216,6 +216,7 @@ $(document).ready(function () {
         $('#reset').show();
         if (correct > incorrect && correct > unanswered) {
             $('#answerarea').prepend('<h4>Congratulations! You win!</h4>')
+            document.getElementById("bgmusic").muted = false;
         }
         else {
             $('#answerarea').prepend('<h4>All is lost!</h4>')
@@ -245,6 +246,7 @@ $(document).ready(function () {
         }
         timer();
         getQuestion();
+        document.getElementById("bgmusic").muted = false;
     });
     //YouTube API experiment
     //I want to be able to display and autoplay, with sound, a specific youtube video when the user clicks an answer choice
